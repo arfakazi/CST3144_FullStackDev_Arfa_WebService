@@ -1,0 +1,14 @@
+{
+  "name": "cst3144_fullstackdev_arfa_webservice",
+  "version": "1.0.0",
+  "description": "CST3144 Coursework Backend Webservice - Arfa",
+  "main": "expressApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arfa Kazi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}

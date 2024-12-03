@@ -78,10 +78,11 @@ app.get("/search/:collectionName", (req, res, next) => {
     req.collection
         .find({
             $or: [
-                { subject: searchRegex },
+                { title: searchRegex },
+                { description: searchRegex },
                 { location: searchRegex },
                 { price: { $regex: searchRegex } },
-                { spaces: { $regex: searchRegex } },
+                { availableInventory: { $regex: searchRegex } },
             ],
         })
         .toArray((e, results) => {

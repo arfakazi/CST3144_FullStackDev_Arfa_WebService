@@ -81,8 +81,8 @@ app.get("/search/:collectionName", (req, res, next) => {
                 { title: searchRegex },
                 { description: searchRegex },
                 { location: searchRegex },
-                { price: { $regex: searchRegex } },
-                { availableInventory: { $regex: searchRegex } },
+                //{ price: { $regex: searchRegex } },
+                //{ availableInventory: { $regex: searchRegex } },
             ],
         })
         .toArray((e, results) => {

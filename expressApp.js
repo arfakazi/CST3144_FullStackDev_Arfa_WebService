@@ -30,7 +30,7 @@ app.get("/", (req, res, next) => {
     res.send("Select a collection, e.g., /collection/messages");
 });
 
-app.param("collectionName", (req, res, next) => {
+app.param("collectionName", (req, res, next, collectionName) => {
     console.log(`Collection set to: ${collectionName}`);
     req.collection = db.collection(collectionName);
     return next();

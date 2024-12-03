@@ -25,18 +25,18 @@ MongoClient.connect(process.env.CONNECTION_STRING, (err, client) => {
     db = client.db(process.env.DATABASE);
 });
 
-app.get("/", (res, req, next) => {
+app.get("/", (req, res, next) => {
     console.log("Accessed root endpoint");
     res.send("Select a collection, e.g., /collection/messages");
 });
 
-app.param("collectionName", (res, req, next) => {
+app.param("collectionName", (req, res, next) => {
     console.log(`Collection set to: ${collectionName}`);
     req.collection = db.collection(collectionName);
     return next();
 });
 
-app.get("/collection/:collectionName", (res, req, next) => {
+app.get("/collection/:collectionName", (req, res, next) => {
     console.log(`Retrieving objects from collection: ${req.params.collectionName}`);
     req.collection.find({}).toArray((e, results) => {
         if (e) return next(e);
@@ -44,7 +44,7 @@ app.get("/collection/:collectionName", (res, req, next) => {
     });
 });
 
-app.post("/collection/:collectionName", (res, req, next) => {
+app.post("/collection/:collectionName", (req, res, next) => {
     console.log(`Adding an object to collection: ${req.params.collectionName}`);
     req.collection.insert(req.body, (e, results) => {
         if (e) return next(e);
@@ -53,7 +53,7 @@ app.post("/collection/:collectionName", (res, req, next) => {
     });
 });
 
-app.put("/collection/:collectionName/:id", (res, req, next) => {
+app.put("/collection/:collectionName/:id", (req, res, next) => {
     console.log(
         `Updating object in collection: ${req.params.collectionName} with ID: ${req.params.id}`
     );
@@ -71,7 +71,7 @@ app.put("/collection/:collectionName/:id", (res, req, next) => {
     );
 });
 
-app.get("/search/:collectionName", (res, req, next) => {
+app.get("/search/:collectionName", (req, res, next) => {
     const searchQuery = req.query.query || "";
     console.log(`Searching in collection: ${req.params.collectionName} with query: ${searchQuery}`);
     const searchRegex = new RegExp(searchQuery, "i");

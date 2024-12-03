@@ -17,12 +17,9 @@ app.use((req, res, next) => {
 });
 
 let db;
-MongoClient.connect(
-    "mongodb+srv://arfakazi:jimin1310@cluster0.jpux4ux.mongodb.net/",
-    (err, client) => {
-        db = client.db("Aras_Classes");
-    }
-);
+MongoClient.connect(process.env.CONNECTION_STRING, (err, client) => {
+    db = client.db(process.env.DATABASE);
+});
 
 // Routing
 

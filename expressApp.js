@@ -4,7 +4,9 @@ const ObjectID = require("mongodb").ObjectID;
 const MongoClient = require("mongodb").MongoClient;
 const path = require("path");
 
-function config(req, res, next) {
+app.use(express.json());
+app.set("port", 3000);
+app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
@@ -13,11 +15,7 @@ function config(req, res, next) {
         "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
     );
     next();
-}
-
-app.use(express.json());
-app.set("port", 3000);
-app.use(config);
+});
 
 let db;
 MongoClient.connect(process.env.CONNECTION_STRING, (err, client) => {

@@ -105,7 +105,6 @@ app.get("/search/:collectionName", (req, res, next) => {
             $or: [
                 // Search across multiple fields using logical OR
                 { title: searchRegex },
-                { description: searchRegex },
                 { location: searchRegex },
                 { price: { $regex: searchRegex } },
                 { availableInventory: { $regex: searchRegex } },

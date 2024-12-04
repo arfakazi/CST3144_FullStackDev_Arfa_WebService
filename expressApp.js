@@ -23,6 +23,16 @@ app.use((req, res, next) => {
     next(); // Proceed to the next middleware or route handler
 });
 
+app.use((req, res, next) => {
+    const method = req.method; // Extracting the HTTP method from the request
+    const url = req.url;
+    const timestamp = new Date();
+
+    console.log(`[${timestamp}] ${method} request to ${url}`); // Logging the method, URL, and timestamp to the console
+
+    next();
+});
+
 // Variable to hold the database connection
 let db;
 
